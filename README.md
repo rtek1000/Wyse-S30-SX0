@@ -1,7 +1,7 @@
 # Wyse-S30-SX0
-DOM backup of Wyse S30 (SX0)
+DOM backup of Wyse S30 (SX0) and Tiny Core 11.1
 
-Tiny Core 11.1
+Tiny Core 11.1:
 - 512MB RAM
 - 128MB DOM
 
