@@ -1,0 +1,260 @@
+/* Parkytowers - CSS file */
+/*-------- Basic layout stuff ---------*/
+
+body{	/* Viewport */
+  font-family: system-ui, Verdana, Helvetica, Arial, sans-serif;
+  width:100%; margin:0px; padding:0px; border: 0px; background:white url(/imgs/wallpaperS.jpg); color:#333333; z-index:-1;}	 
+
+.section{ /* width-constrained view that encloses the rest */
+   width:100%; max-width:950px; margin:10px auto; padding:2px; border-radius:12px; background:white; }
+
+.section2{ /* width-constrained view that encloses the rest */
+   display:flex; flex-direction:row; width:100%; max-width:950px; margin:10px auto; padding:2px; border-radius:12px; background:#D1FAFF; }
+
+.hdr{ /*My width-constrained view that encloses the rest */
+   width:100%; max-width:950px; margin:10px auto; padding:2px; border-radius:12px; background:white; }
+
+.ButtonMenu {	/* Buttons down the LHS */
+ display:inline-block;  margin:0px 4px; padding:0px 6px; width:120px; background:#D1FAFF; color:#333333; z-index:10; }
+
+.MainBody {		/* MainBody for the content  below the header*/
+ display:inline-block;  padding:0px; background: white; width:100%; z-index:5; border-radius:12px; max-width:824px;}
+ @media screen and (max-width:950px) and (min-width:780px ) {  /* for mobile */
+.MainBody {		/* MainBody for the content  below the header*/
+ display:inline-block;  padding:0px; background: white; width:calc(100% - 136px); z-index:5; border-radius:12px; max-width:824px;}
+}
+
+
+#TabMenu{		/* Tabs across the top */
+ overflow:hidden; top:0; left:0; width:100%; padding:0px;border-radius: 0px 12px 0px 0px; margin:0px; border:0px; vertical-align:baseline; font-size:93%; background:#D1FAFF; }
+
+#Content{	/* The Content to the RHS */
+ clear:both; position:relative; padding:5px; margin-left:10px; margin-right:10px; background:white; color:black; max-width:100%; }
+
+
+/* The markers that toggle the menu between visible or not */
+
+.altmenu {display:none; float:left; position:relative; font-style:italic; font-size:1em;}
+
+@media screen and (max-width:780px) {  /* for mobile */
+  .ButtonMenu { display:none; }
+/*  div MainBody{ border-left:none; }*/
+  .altmenu{ display:block; font-style:normal; font-size:3em;}
+}
+
+/* Header formatting */
+
+.hdr img {border:0; padding:0; margin:0px 0px 0px 3px; }
+.hdr h1 { display:block; text-align:right; line-height:95px; height:48px; }
+
+/* The main navigation menu */
+
+.ButtonMenu p  { padding-left:20px; padding-bottom:0; margin-top:0; margin-bottom:0; font-size:10pt; }
+.ButtonMenu hr { position:relative; clear:both; margin-top:0; margin-bottom:6px; }
+
+/* this needed to be a class to work with IOS */
+
+.left-menu    { list-style:none; position:relative; margin:0; padding:0; }
+.left-menu ul { list-style:none; position:relative; display:none; }
+.left-menu li { list-style:none; position:relative; }
+.left-menu a
+{
+ box-shadow:inset 0 1px 0 0 #ffffff;
+ background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+ background-color:#ededed; border-radius:6px; border:1px solid #dcdcdc; margin-bottom:2px;
+ display:inline-block; cursor:pointer; color:blue; width:90px; font-family:Arial; font-size:14px; font-weight:bold;
+ padding:4px 8px; text-decoration:none; text-shadow:0 1px 0 #ffffff;
+}
+
+.left-menu li:hover ul { display:inline-block; position:absolute; top:0px; left:95px; z-index:99; margin:0; padding:0px 15px;}
+.left-menu ul li a { border:1px solid #888888; border-bottom:none; font-size:14px; color:red;
+	background-color:#DCDCDC; background-image:none; padding:2px; margin-left:6px; margin-bottom:4px; }
+
+/*------ Menu Tabs--------*/
+
+#TabMenu ul { padding:5px 10px 0 20px; list-style:none; width:100%; }
+#TabMenu li { display:inline; margin:0; padding:0; }
+#TabMenu a  { float:left; background:url("/thin/imgs/tableft.gif") no-repeat left top; margin:0; padding:0 0 0 4px; text-decoration:none; }
+#TabMenu a span { float:left; display:block; background:url("/thin/imgs/tabright.gif") no-repeat right top; padding:5px 15px 4px 6px; color:blue; }
+#TabMenu a span { float:none;}
+#TabMenu a:hover span	{ color:#FF9834; }
+#TabMenu a:hover		{ background-position:0% -42px; }
+#TabMenu a:hover span	{ background-position:100% -42px; }
+#TabMenu #current a		{ background-position:0% -42px; }
+#TabMenu #current a span { background-position:100% -42px; }
+
+/*--- photos at the top below the tabs  ---*/
+
+#photos { margin-top:4px; clear:both; text-align:center; width:100%; }
+#words	{ margin-top:4px; clear:both; text-align:left;   width:100%; }
+
+/*--- Responsive photo --*/
+.rphoto     { margin-top:4px; clear:both; text-align:center; width:100%; }
+.rphoto img { max-width:100%; max-height:100%; }
+
+.imgfr450     { margin-top:4px; padding-left:12px; clear:both; text-align:center; max-width:55%; float:right }
+.imgfr450 img { width:100%; max-width:450px; height:auto; }
+.imgfr400     { margin-top:4px; padding-left:12px; clear:both; text-align:center; max-width:50%; float:right }
+.imgfr400 img { width:100%; max-width:400px; height:auto; }
+.imgfr350     { margin-top:4px; padding-left:12px; clear:both; text-align:center; max-width:45%; float:right }
+.imgfr350 img { width:100%; max-width:350px; height:auto; }
+.imgfr300     { margin-top:4px; padding-left:12px; clear:both; text-align:center; max-width:40%; float:right }
+.imgfr300 img { width:100%;  max-width:300px; height:auto; }
+
+.imgfl450     { margin-top:4px; padding-right:12px; clear:both; text-align:center; max-width:55%; float:left }
+.imgfl450 img { width:100%; max-width:450px; height:auto; }
+.imgfl400     { margin-top:4px; padding-right:12px; clear:both; text-align:center; max-width:50%; float:left }
+.imgfl400 img { width:100%; max-width:400px; height:auto; }
+.imgfl350     { margin-top:4px; padding-right:12px; clear:both; text-align:center; max-width:45%; float:left }
+.imgfl350 img { width:100%; max-width:350px; height:auto; }
+.imgfl300     { margin-top:4px; padding-right:12px; clear:both; text-align:center; max-width:40%; float:left }
+.imgfl300 img { width:100%; max-width:300px; height:auto; }
+.imgfl200     { margin-top:4px; padding-right:12px; clear:both; text-align:center; max-width:30%; float:left }
+.imgfl200 img { width:100%; max-width:200px; height:auto; }
+
+div.c-photos { margin-top:4px; clear:both; text-align:center; width:100%; }
+div.center { text-align:center; }
+
+h1 { color:blue; text-align:left; }
+h1.center{ text-align:center; }
+
+h2.bars { border-style:solid; border-width:2px 0; } /* H2 with HRs above and below */
+h2.center {text-align:center}
+h2.ul { border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:gray; }
+h2.mh { color:blue; text-align:center; }
+
+.underline { text-decoration:underline; }
+.bunderline { font-weight:bold; text-decoration:underline; }
+
+.uh { margin:0; padding-top:.5em; padding-bottom:.17em; border-bottom:2px solid #aaa; }	/* Underline after heading */
+
+p.mtg { color:blue; font-size:larger; font-style:italic; line-height:50%; }
+
+.tt {  font-family:courier; }
+.ttb { font-family:courier; font-weight:bold; }
+
+A:link {text-decoration:none}
+A:visited {text-decoration:none}
+A:active {text-decoration:none}
+UL {margin-left:0.1in;}
+
+.indentboxs { background-color:#CCFFFF; margin:20px; padding:10px; border:medium double #003399; }
+.indentbox { width:80%; background-color:#CCFFFF; margin:20px; padding:20px; border:medium double #003399; }
+.warning   { clear:both; background-color:#CCFFFF; margin:20px; padding:20px; border:medium double #003399; }
+
+.indent  { margin-left:2em; margin-right:2em; }
+.indentb { margin-left:4em; margin-right:2em; color:blue; }
+
+.subhead { font-size:150%; color:red; }
+
+/* Don't know what is happening here */
+img.none { border-style:none; border:0; padding:0; position:relative; }
+img.show { border-style:none; padding:4px; position:relative; }
+
+pre { overflow:auto; border:gray 1px dashed; padding:5px; font-size:0.9em; background:#efefef }
+pre.listing{ margin-left:2em; margin-right:2em; margin-top:1.5em; margin-bottom:0.5em; overflow-x:auto;}
+
+/*--------- single img display to left or right ------*/
+
+img.fleft  { clear:left;  float:left;  margin-top:0; margin-left:0;  margin:10px; border:0; position:relative; }
+img.fright { clear:right; float:right; margin-top:0; margin-right:0; margin:10px; border:0; position:relative; }
+img.frighte { float:right; margin-top:0; margin-right:0; margin:10px; border:0; position:relative; }
+img.mleft  {  float:left; margin-top:0; margin-left:0; margin:10px; border:0; position:relative; }
+img.center { clear:both; display:block; margin:0 auto; }
+
+img.fr450 { clear:right; float:right; margin-top:0; margin-right:0; margin:10px; border:0; position:relative; width:100%; max-width:450px; }
+/*------ displaying images in a block with margins ---*/
+
+div.step { clear:both; margin-top:25px; margin-bottom:25px; }
+div.step img { float:left; padding-right:10px; padding-bottom:5px; position:relative; }
+
+/*------ grey back ground ----*/
+
+.gray { background-color:#E7E7E7 }
+
+/*---- Centered tables ----*/
+table.center {margin-left:auto; margin-right:auto;}
+
+/*------ spec table -------*/
+table.spec {
+  border:1px solid black;
+  border-spacing:3px;
+  }
+table.spec td	{ border:1px solid black; padding:2px; }
+table.spec th	{ border:1px solid black; padding:2px; }
+
+table.data		{ border:1px solid black; border-spacing:2px; }
+table.data td	{ border:1px solid black; padding:3px; text-align:center; }
+table.data th	{ border:1px solid black; padding:3px; text-align:center;}
+
+table.single	{ border:1px; border-spacing:2px; border-collapse:collapse; }
+table.single td { border:1px solid black; padding:3px; text-align:left;}
+table.single th { border:1px solid black; padding:3px; text-align:left;}
+
+table.singleR	 { border:1px; border-spacing:2px; border-collapse:collapse; }
+table.singleR td { border:1px solid black; padding:3px; text-align:right;}
+table.singleR th { border:1px solid black; padding:3px; text-align:center;}
+
+table.padded td { padding:2px;  text-align:center;}
+
+
+/*---- CSS version of a table ----*/
+
+.Table {display:table;}
+.Title { display:table-caption; text-align:center; font-weight:bold; font-size:larger; }
+.Heading { display:table-row; font-weight:bold; text-align:center; }
+.Row{ display:table-row; }
+.Cell { display:table-cell; border:solid; border-width:thin; padding-left:5px; padding-right:5px; }
+
+/*----- text stuff ------*/
+
+.uline {
+clear:both;
+border:0;
+color:#000000;
+background-color:#000000;
+height:1px;
+width:100%;
+text-align:left;
+}
+
+p.fl {text-indent:-5em; margin-left:5em;}
+
+.center {
+  text-align:center;
+}
+
+/*----- for stuff each end of a line ----*/
+
+.alignleft {
+  float:left;
+}
+
+.alignright {
+  float:right;
+}
+
+/*------ hide stuff until required -----*/
+
+.toggle__input {display:none;}
+.toggle__input + label:after {content:"\25BC" }
+.toggle__input:checked + label:after {content:"\25B2";}
+.toggle__input:checked ~ .toggle__content {display:block;}    
+.toggle__input:not(:checked) ~ .toggle__content {display:none;}
+
+/*------ display one of two items -----*/
+
+.swap__input {display:none;}
+/*.swap__input + label:after {content:"SWITCH1" }
+.swap__input:checked + label:after {content:"SWITCH2";} */
+.swap__input:checked ~ .swap__one {display:block;}    
+.swap__input:checked ~ .swap__two {display:none;}    
+.swap__input:not(:checked) ~ .swap__one {display:none;}
+.swap__input:not(:checked) ~ .swap__two {display:block;}
+
+/*-------BIOS type display----------*/
+.bios { display: inline-block; position: relative; background-color: blue; color: white; border: 2px; padding: 6px; font-family: courier;}
+.bios .box  { margin: 6px; border: 2px solid white; padding: 0px; }
+.bios .title { display: inline-block; position: absolute; top:2px; background-color: blue; height: 1em; width: fit-content(50%); left:50%; transform:  translateX(-50%);  white-space: pre;}
+.bios .box .tbox { margin: 6px;  white-space: pre;}
+.bios .box .line { margin: 0px; border: 1px solid white; }

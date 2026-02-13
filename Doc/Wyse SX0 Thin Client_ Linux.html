@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://www.parkytowers.me.uk/thin/wyse/s10/tc_kernel.shtml -->
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async="" src="./Wyse SX0 Thin Client_ Linux_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WN3WNLJZLD');
+</script>
+<!-- Copyright (c) David Parkinson 2008-2023 -->
+
+
+<!-- favicon stuff -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.parkytowers.me.uk/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.parkytowers.me.uk/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.parkytowers.me.uk/favicon-16x16.png">
+<link rel="manifest" href="https://www.parkytowers.me.uk/site.webmanifest">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<!-- end favicon stuff -->
+
+<link rel="alternate" type="application/rss+xml" href="https://www.parkytowers.me.uk/thin/thinrss.xml" title="Repurposing Thin Clients">
+
+<title>Wyse SX0 Thin Client: Linux</title>
+
+
+
+<meta name="description" content="Tiny Core linux kernel for a Wyse SX0">
+
+
+
+<meta name="rating" content="General">
+<meta http-equiv="Content-language" content="en-GB">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<!-- deal with lastest IE looking for browserconfig.xml -->
+<meta name="msapplication-config" content="none">
+
+<link rel="stylesheet" type="text/css" href="./Wyse SX0 Thin Client_ Linux_files/thin1.css">
+
+
+
+
+
+
+</head>
+
+<body>
+<header>
+ <div class="hdr">
+  <div class="altmenu"><!-- Hamburger for mobile phone navigation -->
+   
+   <a href="https://www.parkytowers.me.uk/thin/inc/menu.shtml?menu=1">
+   <img style="float:left" src="./Wyse SX0 Thin Client_ Linux_files/menu.jpg" height="80" width="80" alt="Menu"></a>
+  </div>
+  <!-- Logo -->
+  <a href="https://www.parkytowers.me.uk/thin/"><img style="float:left" src="./Wyse SX0 Thin Client_ Linux_files/ptowers.jpg" height="90" width="95" alt="Logo"></a>
+  <h1>Wyse SX0: Tiny Core&nbsp;</h1>
+ </div>
+</header>
+
+
+ <div class="section2">
+<!-- The LHS navigation pane -->
+ <nav>
+   <div class="ButtonMenu -tv-ignore:P871" spellcheck="false"><br>
+
+<!-- including nav_hardware.shtml -->
+<!-- Manufacturers/Models Navigation -->
+
+<ul class="left-menu">
+  <li><a href="https://www.parkytowers.me.uk/thin/">HOME</a>
+</li></ul>
+<p style="font-size: 5pt;">&nbsp;</p>
+<hr>
+<p style="font-size: 5pt;">&nbsp;</p>
+<ul class="left-menu">
+  <li><a href="https://www.parkytowers.me.uk/thin/hware/hardware.shtml">SUMMARY</a>
+</li></ul>
+<p style="font-size: 5pt;">&nbsp;</p>
+<hr>
+<ul class="left-menu">
+  <li><a href="https://www.parkytowers.me.uk/thin/10zig/">10ZIG</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/10zig/44xx/">44xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/45xx/">45xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/55xx/">55xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/56xx/">56xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/57xx/">57xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/58xx/">58xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/58xxq/">58xxq</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/59xxq/">59xxq</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/60xxq/">60xxq</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/67xx/">67xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/68xx/">68xx</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/78xxq/">78xxq</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/rbt4xx/">RBT-402</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/rbt616/">RBT-616</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/rbt800/">RBT-802</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/rbt820/">RBT-820</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/acer/">ACER</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/acer/aspirerevo/r3610/">Revo R3610</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/astec/">ASTEC</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/astec/a3500/">A3500S</a>
+	</li></ul>
+
+ </li><li><a href="https://www.parkytowers.me.uk/thin/atrust/">ATRUST</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/atrust/t68/">t68W</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/viewsonic/t45/">t170W</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/atrust/t176/">t176L</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/atrust/t180/">t180W</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/Axel/">AXEL</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/Axel/">M75C</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/bos/">BOSaNOVA</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/bos/">The Company</a>
+	</li></ul>
+
+   </li><li><a href="https://www.parkytowers.me.uk/thin/centerm/">CENTERM</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/centerm/c92/">C92</a>
+	</li></ul>
+
+ </li><li><a href="https://www.parkytowers.me.uk/thin/cisco/vxc-6215/">CISCO</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/cisco/vxc-2111/">VXC-2111</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/cisco/vxc-2112/">VXC-2112</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/cisco/vxc-2212/">VXC-2212</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/cisco/vxc-6215/">VXC-6215</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/chippc/">CHIPPC</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/chippc/xpd4741/">EX-PC</a>
+	</li></ul>
+ 
+  </li><li><a href="https://www.parkytowers.me.uk/thin/cli/">CLI</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/cli/ag66xx/">AG66xx</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/clientron/">CLIENTRON</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/clientron/">Clientron</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/clientron/cseries.shtml">C series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/clientron/lseries.shtml">L series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/clientron/useries.shtml">U series</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/EvoT20/">COMPAQ</a>
+    <ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/EvoT20/">Evo T20</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/EvoT30/">Evo T30</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/dell/">DELL</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/dell/fx130/">FX130</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/dell/fx160/">FX160</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/10zig/56xx/">FX170</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/devonit/">DEVON IT</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/precedence/tcx3/">LT 310</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/devonit/tc5dw/">TC5 Series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/devonit/tc15/">TC15</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/dtr/dt166/">DT R'SRCH</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/dtr/dt133/">DT133</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/dtr/dt166/">DT166</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/esesix/">ESESIX</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/esesix/wlgx01/">WLGX01</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/esesix/wlvi03/">WLVI03</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/">FJ S'MENS</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/Futro/a250/">A250</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/a300/">A300</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/optoma/st320/">B100</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s100/">S100</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s200/">S200</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s300/">S300</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s400/">S400</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s450/">S450</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s520/">S520</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s540/">S540</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s700/">S700</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s720/">S720</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s740/">S740</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s900/">S900</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s920/">S920</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/s940/">S940</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Futro/x300/">X300</a>
+	</li></ul>
+ 
+ </li><li><a href="https://www.parkytowers.me.uk/thin/giada/">GIADA</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/giada/f101/">F101</a>
+	</li></ul>
+
+ </li><li><a href="https://www.parkytowers.me.uk/thin/hp/">HP</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/hp/gt7725/">gt7720</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/gt7725/">gt7725</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t420/">t420</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t430/">t430</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t510/">t510</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t520/">t520</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t530/">t530</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t540/">t540</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t610/">t610</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t620/">t620</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t630/">t630</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t640/">t640</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t730/">t730</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t740/">t740</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t820/">t820</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/">t5000</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5125/">t5125</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5135/">t5135</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5540/">t5145</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5300/">t5300</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5325/">t5325</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5515/">t5515</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5520/">t5520</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5530/">t5530</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5540/">t5540</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5540/">t5545</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5570/">t5570</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5540/">t5630</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5700/">t5700</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5710/">t5710</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5720/">t5720</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5730/">t5730</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/hp/t5740/">t5740</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/ibm/ns1000/">IBM</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/ibm/ns1000/">NS-1000</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/">IGEL</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/Igel/w/">W</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/2100/">2100</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/2110/">2110</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/3210/">Compact</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/4210/">Winestra</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/L100/">L100</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/">UD series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud2/D200/">UD2: D200</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud2/D210/">UD2: D210</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud2/D220/">UD2: D220</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud2/M250C/">UD2: M250C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M300C/">UD3: M300C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M310C/">UD3: M310C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M320C/">UD3: M320C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M330C/">UD3: M330C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M340C/">UD3: M340C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud3/M350C/">UD3: M350C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud5/H700C/">UD5: H700C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud5/H710C/">UD5: H710C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud5/H820C/">UD5: H820C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud5/H830C/">UD5: H830C</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/Igel/ud/ud7/H860C/">UD5: H860C</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/lenovo/m32/">LENOVO</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/lenovo/m32/">M32</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/NComp/">NCOMPUTING</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/NComp/l130/">L130</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/NComp/l230/">L230</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/nec/D380/">NEC</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/nec/D380/">D380</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/nec/US310e/">US310e</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/nec/US320f/">US320f</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/">NEOWARE</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/neoware/CA2/">CA2</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA5/">CA5</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA9/">CA9</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA10/">CA10</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA15/">CA15</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA16/">CA16</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA19/">CA19</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA21/">CA21</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CA22/">CA22</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/Capio/">Capio</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/CapioII/">CapioII</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/Eon/">Eon</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/neoware/M100/">M100</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/">NETVOYAGER</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1010/">LX-1010</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1014/">LX-1014</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1020/">LX-1020</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1021/">LX-1021</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1021a/">LX-1021ii</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/netvoyager/lx1022/">LX-1022</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/norhtec/microclient/">NORHTEC</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/norhtec/microclient/">MicroClient</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/norhtec/microclient/">MC JR</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/norhtec/microclient/">MC SR</a>
+	</li></ul>
+
+
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/optoma/">OPTOMA</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/optoma/st320/">ST320E</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/praim/">PRAIM</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/praim/compact_dc/">Compact DC</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/praim/ultra/">Ultra</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/pegatron/">PEGATRON</a>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/precedence/tcx3/">P'CEDENCE</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/precedence/nc/"><span spellcheck="false">nc</span></a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/precedence/tcx3/">tcx3</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/QLXpro/">QLX</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/QLXpro/">Ministation</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/qsr/">QSR</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/qsr/dx-3000/">DX-3000</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/rangee/">RANGEE</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/rangee/lt360/">LT360</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/relisys/rwt200em/">RELISYS</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/relisys/rwt200em/">RWT200EM</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/relisys/rwt205ce/">RWT205CE</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/samsung/tc190/">SAMSUNG</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/samsung/tc190/">TC190</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/samsung/tc190/">TC240</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/sun/">SUN</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/sun/SunRay1/">Sun Ray 1</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/sun/SunRay2/">Sun Ray 2</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/tadpole/">TADPOLE</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/tadpole/ft01/">FT01</a>
+  	  </li><li><a href="https://www.parkytowers.me.uk/thin/tadpole/ft01/">M1400</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/tadpole/pulsar/">Pulsar</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/teco/">TECO</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/relisys/rwt205ce/">TR3230</a>
+  	  </li><li><a href="https://www.parkytowers.me.uk/thin/teco/tr3760b/">TR3760B</a>
+	</li></ul>
+
+</li><li><a href="https://www.parkytowers.me.uk/thin/tonk/">TONK</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/tonk/">The Company</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/viewsonic/">VIEWSONIC</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/viewsonic/t45/">SC-T45</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/viewsonic/t46/">SC-T46</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/vxl/">VXL</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/vxl/itona/iqb/">IQB series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/vxl/itona/">Itona</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/vxl/percio/">Percio</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/vxl/tc3200/">TC3200</a>
+	</li></ul>
+
+  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/">WYSE</a>
+	<ul>
+	  <li><a href="https://www.parkytowers.me.uk/thin/wyse/3030/">3290</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3030/">3030</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3040/">3040</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/d/dx0q/">5020</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/5060/">5060</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/5070/">5070</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/d/">D Class</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/d/d10d/">D10DP</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/d/dx0q/">Dx0Q</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/z/">Z Class</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/z/z90d7/">Z90D7</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/z/zx0q/">Zx0Q</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/R90L/">R90L</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/R90L/r90le.shtml">R90LE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/p/p20/">P20</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/x/">X Series</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/x/c/">X90CW</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/Xn0/">Xn0</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/Xn0L/">Xn0L</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/x/Xn0m/">Xn0m</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/cx0/">CX0</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/tx0/">TX0</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/">SX0</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/vx0/">VX0</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/1200le/">WT1200LE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3125se/">WT3125SE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3150se/">WT3150SE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3235le/">WT3235LE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/3630le/">WT3630LE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/941gxl/">WT941GXL</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/9450xe/">WT9450XE</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/9455xl/">WT9455XL</a>
+	  </li><li><a href="https://www.parkytowers.me.uk/thin/wyse/9650xe/">WT9650XE</a>
+	</li></ul>
+</li></ul>
+
+
+  <hr>
+    </div> <!-- end of left column -->
+  </nav>
+
+
+<div class="MainBody">
+
+
+<!-- the tabbed index across the top -->
+<div id="TabMenu">
+  <ul>
+	<li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/"><span>Hardware</span></a></li>
+    <li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/Firmware.shtml"><span>Firmware</span></a></li>
+	<li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/Linux.shtml"><span>Linux</span></a></li>
+    <li id="current"><a href="https://www.parkytowers.me.uk/thin/wyse/s10/tc_kernel.shtml"><span>TinyCore</span></a></li>
+	<li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/win_ce.shtml"><span>Windows</span></a></li>
+    <li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/dos.shtml"><span>DOS</span></a></li>
+    <li><a href="https://www.parkytowers.me.uk/thin/wyse/s10/Links.shtml"><span>Links</span></a></li>
+  </ul>
+</div>
+<!-- end of index -->
+<div id="Content">
+<h2 class="ul">Tiny Core on the Sx0</h2>
+<p>As it is a neat thin client that I sometimes press into service I occasionally revisit the Sx0
+and build an up-to-date Sx0 specific Tiny Core kernel for it.  You will find the builds below.
+I must admit these haven't been extensively tested, but they do work for me.  All you need to do
+is download the new kernel and add it to the <b>boot</b> directory on the Tiny Core USB pen drive
+(or whatever).  You can either overwrite the existing <b>vmlinuz</b> file or add a new entry to the
+menu system to let you select the Wyse Sx0 specific kernel - an example of such a <b>syslinux</b>
+menu entry is below.
+</p><pre class="listing" spellcheck="false">LABEL tcwyse
+MENU LABEL TinyCore for the Wyse SX0 (on slow devices, waitusb=5)
+TEXT HELP
+Boot the Wyse Sx0 build of TinyCore with Embedded X/GUI extensions,
+if using a slow device. Boot media is removable. Use TAB to edit
+options for specific needs.
+ENDTEXT
+KERNEL /boot/vmlinuzSx0
+INITRD /boot/core.gz
+APPEND loglevel=3  kmap=qwerty/uk waitusb=5
+</pre>
+
+<h2 class="ul">Issues Addressed</h2>
+<ul>
+<li>Edit the file <b>pata_cs5536.c</b> to fix the timing issue and to re-enable the IDE interface.
+</li><li>Include the <b>pata_cs5535.c</b> driver to support the early version of the Sx0.
+</li><li>Remove all IDE drivers other than CS5535 and CS5536 drivers.
+</li><li>Remove the i8042 driver which crashes on initialisation.
+</li></ul>
+<p>You could further optimise the kernel, but my experience is that the more you remove the more
+likely it is that something breaks so I ended up leaving the rest alone.
+
+</p><p>In the March 2020 revisit for Tiny Core release 11.x I couldn't easily determine how to remove
+the i8042 driver. I dealt with the problem at the time by including the kernel boot parameters:
+<b>i8042.noaux</b> and <b>i8042.nokbd</b>. Since then I've built a replacement version without the
+offending driver removing the need for these parameters.
+
+</p><h2 class="ul">Downloads</h2>
+<p>All you really need is the rebuilt kernel for the version of Tiny Core that you're intending to use.
+If you have any interest in going further and building your own version then you've got the option of
+using my .config as a starting point along with the patched CS5336 driver. It is relatively
+straight forward to build a new kernel and the approach I used to build one is documented
+<a href="https://www.parkytowers.me.uk/thin/Linux/TinycoreCK.shtml">here</a>.
+
+
+</p><p>Download the patched CS5536 file: <a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/pata_cs5536.c">pata_cs5336.c</a>.
+</p><blockquote>
+<p></p><table>
+<tbody><tr><th>Tiny Core</th><th></th><th>kernel</th><th>.config</th></tr>
+<tr><td>12.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_12">vmlinuzSx0_12</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_11">configSx0_12</a></td></tr>
+<tr><td>11.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_11">vmlinuzSx0_11</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_11">configSx0_11</a></td></tr>
+<tr><td>10.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_10">vmlinuzSx0_10</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_10">configSx0_10</a></td></tr>
+<tr><td>9.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_9">vmlinuzSx0_9</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_9">configSx0_9</a></td></tr>
+<tr><td>8.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_8">vmlinuzSx0_8</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_8">configSx0_8</a></td></tr>
+<tr><td>7.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_7">vmlinuzSx0_7</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_7">configSx0_7</a></td></tr>
+<tr><td>5.x</td><td>:</td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/vmlinuzSx0_5">vmlinuzSx0_5</a></td><td><a href="https://www.parkytowers.me.uk/thin/wyse/s10/code/configSx0_5">configSx0_5</a></td></tr>
+</tbody></table>
+</blockquote>
+
+<h2 class="ul">History</h2>
+<p>April 2021, Tiny Core 12.x: Worked out how to remove the i8042 driver removing the need for any 
+specific kernel boot parameters.
+
+</p><p>March 2020, Tiny Core 11.x: I found that I couldn't easily remove the i8042 driver. The work-around
+was to include the kernel boot parameters: <b>i8042.noaux i8042.nokbd</b>. It has since been rebuilt
+without the i8042 driver.
+
+</p><p>May 2019: Tiny Core 10.x &amp; 9.x:I found that the latest versions of Tiny Core using Linux kernels
+4.14.10 (v9.x) and 4.19.10 (v10.x) did not run.  With v9 the kernel crashed towards the end of the 
+boot process, with v10 it was about half way through. I tracked this down to the i8042 driver which is 
+the legacy PS/2 port driver.  The CS5535 and CS5336 do emulate the i8042 but the Sx0 itself does not have
+any PS/2 ports, so my solution was to remove the driver from the build.
+
+</p><p>January 2018, Tiny Core 8.x: The timing problem during CS5536 initialisation appears to have returned
+so that mod is back in. Also, towards the end of the startup sequence, I'm seeing some delay with messages
+about floppy drives....
+</p><pre class="listing" spellcheck="false">........
+floppy0: no floppy controllers found
+work still pending
+Floppy drive(s): fd0 is 1.44M
+floppy0: no floppy controllers found
+work still pending
+Floppy drive(s): fd0 is 1.44M
+floppy0: no floppy controllers found
+.......
+</pre>
+<p>...repeated a number of times. I don't know why this happens and I haven't spent much time
+looking into it.  It does increase the startup time but otherwise doesn't appear to affect the
+system.
+
+</p><p>February 2017: Tiny Core 7.x: It looks like the CS5336 initialisation timing problem has been fixed.
+
+</p><p>May 2015: Tiny Core 5.x: First release. Added CS5335 driver and patched CS5336 driver to fix the
+timing problem and to enable the IDE interface.
+
+</p><h2 class="ul">CS5336 patches</h2>
+<p>CS5336 driver source file: <b>drivers/ata/pata_cs5536.c</b>
+</p><p>To fix the timing issue which can cause a lock-up during the CS5336 initialisation the following
+is added at the start of the functions following all the #includes.
+</p><pre class="listing" spellcheck="false">/*
+ * The mfgpt timer interrupt is running early, so we must keep the south bridge
+ * mmio always enabled. Otherwise we may race with the PCI configuration which
+ * may temporarily disable it. When that happens and the timer interrupt fires,
+ * we are not able to clear it and the system will hang.
+ */
+static void cs5536_isa_mmio_always_on(struct pci_dev *dev)
+{
+	dev-&gt;mmio_always_on = 1;
+}
+DECLARE_PCI_FIXUP_CLASS_EARLY(PCI_VENDOR_ID_AMD, PCI_DEVICE_ID_AMD_CS5536_ISA,
+	PCI_CLASS_BRIDGE_ISA, 8, cs5536_isa_mmio_always_on);
+</pre> 
+
+<p>To override the BIOS disabling the IDE interface two lines are added to the function
+<b>cs5536_init_one()</b>.
+</p><pre class="listing" spellcheck="false">.......
+        if (use_msr)
+                printk(KERN_ERR DRV_NAME ": Using MSR regs instead of PCI\n");
+
+        cs5536_read(dev, CFG, &amp;cfg);
+        <b>cfg |= IDE_CFG_CHANEN;             &lt;&lt;---ADD
+        cs5536_write(dev, CFG, cfg);       &lt;&lt;---ADD</b>
+
+        if ((cfg &amp; IDE_CFG_CHANEN) == 0) {
+                printk(KERN_ERR DRV_NAME ": disabled by BIOS\n");
+.......
+</pre>
+
+
+
+
+<footer>
+<p style="clear:both">&nbsp;
+</p><hr>
+<p style="margin-top:0px;"><span style="float:left">
+Any comments?
+<a href="mailto:thin@parkytowers.me.uk">
+email me</a>.</span>
+<span style="float:right">
+
+Added May 2015
+
+
+&nbsp;&nbsp;&nbsp;Last update April 2021
+
+</span>
+</p></footer>
+</div>  <!-- end of Content -->
+</div>  <!-- end of MainBody -->
+</div>	<!-- end of Main -->
+
+
+</body></html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://www.parkytowers.me.uk/thin/Linux/TinycoreCK.shtml -->
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async="" src="./Thin Clients_ Building a Tinycore kernel_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WN3WNLJZLD');
+</script>
+<!-- Copyright (c) David Parkinson 2008-2023 -->
+
+
+<!-- favicon stuff -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.parkytowers.me.uk/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.parkytowers.me.uk/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.parkytowers.me.uk/favicon-16x16.png">
+<link rel="manifest" href="https://www.parkytowers.me.uk/site.webmanifest">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<!-- end favicon stuff -->
+
+<link rel="alternate" type="application/rss+xml" href="https://www.parkytowers.me.uk/thin/thinrss.xml" title="Repurposing Thin Clients">
+
+<title>Thin Clients: Building a Tinycore kernel</title>
+
+
+
+<meta name="description" content="Compiling a custom kernel for Tiny Core Linux">
+
+
+
+<meta name="rating" content="General">
+<meta http-equiv="Content-language" content="en-GB">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<!-- deal with lastest IE looking for browserconfig.xml -->
+<meta name="msapplication-config" content="none">
+
+<link rel="stylesheet" type="text/css" href="./Thin Clients_ Building a Tinycore kernel_files/thin1.css">
+
+
+
+
+
+
+</head>
+
+<body>
+<header>
+ <div class="hdr">
+  <div class="altmenu"><!-- Hamburger for mobile phone navigation -->
+   <a href="https://www.parkytowers.me.uk/thin/inc/menu.shtml?menu=0">
+   <img style="float:left" src="./Thin Clients_ Building a Tinycore kernel_files/menu.jpg" height="80" width="80" alt="Menu"></a>
+  </div>
+  <!-- Logo -->
+  <a href="https://www.parkytowers.me.uk/thin/"><img style="float:left" src="./Thin Clients_ Building a Tinycore kernel_files/ptowers.jpg" height="90" width="95" alt="Logo"></a>
+  <h1>Tiny Core: Custom Kernel&nbsp;</h1>
+ </div>
+</header>
+
+
+ <div class="section2">
+<!-- The LHS navigation pane -->
+ <nav>
+   <div class="ButtonMenu -tv-ignore:P871" spellcheck="false"><br>
+
+<!-- Including nav_general.shtml -->
+<!-- General navigation pane -->
+<p style="font-size: 5pt;">&nbsp;</p>
+<ul class="left-menu">
+<li><a href="https://www.parkytowers.me.uk/thin/">HOME</a>
+</li></ul>
+<p style="font-size: 5pt;">&nbsp;</p>
+<hr>
+<p style="font-size: 5pt;">&nbsp;</p>
+<ul class="left-menu">
+<li><a href="https://www.parkytowers.me.uk/thin/10zig/">DETAILS</a>
+</li></ul>
+<p style="font-size: 5pt;">&nbsp;</p>
+<hr>
+<p style="font-size: 5pt;">&nbsp;</p>
+<ul class="left-menu">
+<li><a href="https://www.parkytowers.me.uk/thin/hware/hardware.shtml">H'WARE</a>
+</li><li><a href="https://www.parkytowers.me.uk/thin/info/neoware.shtml" class="button">MFRS</a>
+</li><li><a href="https://www.parkytowers.me.uk/thin/Tools/">TOOLS</a>
+</li><li><a href="https://www.parkytowers.me.uk/thin/Linux/">LINUX</a>
+</li><li><a href="https://www.parkytowers.me.uk/thin/projects/">PROJECTS</a><br>
+</li></ul>
+<p style="font-size: 5pt;">&nbsp;</p>
+
+
+  <hr>
+    </div> <!-- end of left column -->
+  </nav>
+
+
+<div class="MainBody">
+
+
+<!-- the tabbed index across the top -->
+<div id="TabMenu">
+  <ul>
+	<li><a href="https://www.parkytowers.me.uk/thin/Linux/"><span>Linux</span></a></li>
+    <li id="current"><a href="https://www.parkytowers.me.uk/thin/Linux/Tinycore.shtml"><span>Tiny Core</span></a></li>
+    <li><a href="https://www.parkytowers.me.uk/thin/Linux/other.shtml"><span>Other</span></a></li>
+   <li><a href="https://www.parkytowers.me.uk/thin/Linux/benchmarks.shtml"><span>Benchmarks</span></a></li>
+  </ul>
+</div>
+<!-- end of index -->
+<div id="Content">
+<h2 class="mh">Building a custom Tiny Core kernel</h2>
+
+<h2 class="ul">Introduction</h2>
+<p>There may come a time when you want to build your own custom kernel for a particular thin client.
+For example I needed to do this whilst sorting out a problem with a
+<a href="https://www.parkytowers.me.uk/thin/wyse/s10/">Wyse S10</a> where, amongst other things, the BIOS was disabling
+the IDE interface so preventing its use.  My solution to this was to modify the pata_CS5536 driver so
+that it re-enabled the interface as part of its initialisation phase, and then recompile the kernel so
+that it used this modified driver.  At the same time I took the opportunity to remove the embedded
+collection of SATA/IDE drivers that were not used by the Wyse S10. Also there is an earlier variant
+of the S10 that uses the pata_CS5535 driver which, for many years, has been marked 'experimental' and
+not included in the standard build.
+
+</p><p>In principle a kernel rebuild is not a simple process as the modules are also an integral part
+of the system.  These also should be recompiled and then the associated ramdisk(s) (<b>core.gz</b>
+et al) remastered with the rebuilt modules.  However, as in this case where the changes you've made
+to the kernel are minor, we can skip the modules/remastering stage which leaves us with the simple
+process of producing a new <b>vmlinuz</b> kernel file.  This is the process described here.
+
+</p><p>This how-to describes how to set up an environment that will let you recompile the Linux
+kernel, and shows you how you can make minor changes to the kernel configuration to tailor
+it more to specific hardware.
+
+</p><p>If you are intending to be more adventurous I would note that if you are too aggressive at removing
+stuff from the kernel you may end up with a kernel that crashes on startup.  The basic principle
+is to be patient and only make a small number of changes at a time.  You should also keep a copy of
+the previous kernel <b>.config</b> file so that it is easy to revert to a previous (working) build
+in the event of such a thing happening.
+
+</p><p>At the time of writing Tiny Core is at revision 10.0 and uses kernel 4.19.10.  If you're following
+this guide with a later build you will need to make minor adjustments to file names and paths to match
+the current release.
+
+</p><h2 class="ul">Prerequisites</h2>
+<p>You obviously need an environment to build the kernel in - a combination of hardware and software.
+Back in 2013 I used a Shuttle PC (spec lost in the mists of time) running Fedora.
+</p><p>These days I find the obvious candidate for the operating system to be Tiny Core itself.  As to
+hardware you've got the option of using what ever you have to hand (old PC, thin client or whatever)
+or you can install Tiny Core in a Virtual Machine (such as Virtual Box) on your Windows(?) desktop
+computer. The choice is yours.
+
+</p><p>Modern thin clients are a lot more powerful than they used to be and I'm currently using a
+<a href="https://www.parkytowers.me.uk/thin/wyse/d/d10d/">Wyse Dx0D</a> fitted with a dual-core CPU, 2GB of RAM and an
+4GB SSD for this task.  This is running the same version of Tiny Core (10.0) that I want to build
+the new kernel for.
+
+</p><p>Installing Tiny Core is straight forward - use something like LiLi (Linux Live USB creator)
+to install Tiny Core onto a pen drive. Boot from that pen drive, download the <b>tc-install.tcz</b>
+app and then run it.  Install Tiny Core to the hard disk and, when filling in the command
+line options, set /home and /opt to be persistent on the hard disk.  If you don't they will be RAM
+based and so have to be saved/restored on shutdown/boot. (<b>tc</b>'s home directory with the 
+kernel files comes in at 1GB).
+
+</p><p>In selecting your hardware base you don't actually need vast amounts of disk space - at least
+not 'vast' in today's terms. I found that the Tiny Core development installation described below
+along with the Linux kernel took up ~1.3GB of disk space.
+
+</p><p>When I went through this exercise  back in February 2017 I tried out three thin clients:
+</p><ol>
+<li>A Dell FX160 fitted with 1GB of RAM and an 80GB laptop drive.  The CPU in this is an Intel
+Atom 230 single core processor running at 1.6GHz.
+</li><li>A Dell Z90D7 fitted with 2GB of RAM and a SanDisk U100 8GB SSD. The CPU in this an AMD
+G-T56N.  It's a dual core CPU running at 1.65GHz.
+</li><li>A Dell D10DP fitted with 2GB of RAM and a SanDisk U100 8GB SSD. The CPU in this an AMD
+G-T48E.  It's a dual core CPU running at 1.4GHz.
+</li></ol>
+<p>Having set up each machine I did a <b>make clean</b> followed by <b>time make bzImage</b> to get the
+following results:
+</p><blockquote>
+<table class="single">
+  <tbody><tr class="gray"><th>&nbsp;</th><th>Z90D</th><th>D10DP</th><th>FX160</th></tr>
+  <tr><td>real</td><td>43m 23.11s</td><td>49m 16.16s</td><td>1hr 8m 04s</td></tr>
+  <tr><td>user</td><td>41m 21.27s</td><td>46m 56.87s</td><td>1hr 5m 06s</td></tr>
+  <tr><td>sys</td><td>1m 46.47s</td><td>2m 03.65s</td><td>2m 59.61s</td></tr>
+</tbody></table>
+</blockquote>
+<p>In January 2018, with kernel 4.8.17, the initial build time was 1 hour 12 minutes on the Wyse D10DP.
+I guess this reflects the drivers and features that have been added to the kernel since release 4.2.9.
+</p><p>Note: The timings are for the first pass when <i>everything</i> is compiled. Thereafter, after I edited the
+kernel <b>.config file</b> to remove the unwanted drivers the build time was around 1 minute 20 seconds.
+It took a similar time to rebuild the kernel after I had edited the <b>pata_cs5536.c</b> driver file.
+</p><p>With the latest iteration (kernel 4.19.10) the initial build comes in at just under 1hr 20 minutes.
+
+</p><h2 class="ul">Configuring Tiny Core</h2>
+<p>Having put together a basic Tiny Core platform the next step is to fire up the App Browser and
+download and install the various extensions you'll need.
+</p><p><img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen3.gif" alt="Tiny Core App Browser" class="center">
+</p><p>We need to install:
+</p><ul>
+<li>kmaps.tcz
+</li><li>compiletc.tcz
+</li><li>perl5.tcz
+</li><li>ncurses-dev.tcz
+</li><li>seamonkey.tcz or chromium-browser.tcz
+</li><li>bash.tcz
+</li><li>bc.tcz
+</li></ul>
+
+<p>The first is to set things up for your keyboard (if non-US) - don't forget to add <b>kmap=qwerty/uk</b>
+or the equivalent to the syslinux/extlinux boot menu if you haven't already.
+</p><p>The next two items install the tools required to compile the kernel.
+</p><p>The <b>ncurses</b> library is used by <b>menuconfig</b> (see on).
+</p><p>Finally you'll need the browser to get hold of the kernel sources.
+</p><p>Now decide where you're going to do the work.  In this case I'm happy to do this as the standard user (<b>tc</b>).
+To keep track of things I'll create a subdirectory <b>wyseSX0</b> to remind me in a few months time what
+machine this kernel build was targeted at.  Also, in case I'm going to do this for another thin client,
+I'll create another directory <b>kernel</b> to keep a local copy of the original files to save me having
+to download them again.
+</p><pre class="listing">tc@box:~ mkdir wyseSX0 kernel
+tc@box:~
+</pre>
+<p>If you've a non-us keyboard and downloaded <b>kmaps.tcz</b> it's worth rebooting at this point to check
+that you've got everything set correctly so that your keyboard works as it should.
+
+</p><h2 class="ul">Install Source Tree</h2>
+<p>The next step is to get hold of the kernel sources.  Luckily for us these are already packaged up
+and available from the Tiny Core site or one of its mirrors.  The
+<a href="https://wiki.tinycorelinux.net/doku.php?id=wiki:mirrors">wiki</a> has a list of mirrors.  Pick a suitable
+one to suit your location.  <b>https://ftp.nluug.nl/os/Linux/distr/tinycorelinux/</b> works nicely for
+me here in the UK.
+</p><p>On firing up a browser and heading to the chosen mirror we find:
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen1.gif" alt="Tiny Core Source Mirror" class="center">
+</p><p>Next we have to drill down through several screens to reach the sources....
+</p><div spellcheck="false">
+<ul>
+<li><b>10.x/</b>  we're using 10.0...
+</li><li><b>x86/</b> ...it's the 32-bit x86 version...
+</li><li><b>release/</b> ...the released version...
+</li><li><b>src/</b> ...we're after the sources...
+</li><li><b>kernel/</b> ...for the kernel
+</li></ul>
+</div>
+<p>This should bring you to the following screen:
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen2.gif" alt="Tiny Core source files" class="center">
+</p><p>10.0 uses kernel 4.19.10 so we now need to download the two circled files.  One is the kernel source
+tree which already has all Tiny Core specific patches applied to it.  The other is the config file
+that determines exactly how it is built.  Click on each in turn and download them into the <b>kernel</b>
+subdirectory.
+</p><p>Next we need to extract the files.  This is easily done with a couple of commands from a terminal window:
+</p><pre class="listing" spellcheck="false">$ cd ~/wyseSX0
+tc@box:~/wyseSX0$ tar xvf ~/kernel/linux-4.19.10-patched.txz
+tc@box:~/wyseSX0$ cp ~/kernel/config-4.19.10-tinycore linux-4.19.10/.config
+</pre>
+<p>The <b>tar</b> command extracts the kernel source to the directory <b>~/wyseSX0/linux-4.19.10/</b>
+and the <b>cp</b> command puts the Tiny Core specific configuration file in the right place.
+
+</p><h2 class="ul">Initial Build</h2>
+<p>We now have everything set up to build the kernel.  It's worth having a quick go at this
+stage to confirm that everything works.  I also like to benchmark things using the
+<b>time</b> to get an idea of how long this takes.
+</p><p>Whilst the kernel compiles you'll see odd warning messages, but you don't have to worry
+unless things halt with a specific error message.
+</p><pre class="listing" spellcheck="false">tc@box:~/wyseSX0$ cd linux-4.19.10
+tc@box:~/wyseSX0/linux-4.19.10$ make clean
+tc@box:~/wyseSX0/linux-4.19.10$ time make bzImage
+</pre>
+<p>Our new kernel is sitting in the directory <b>arch/x86/boot/bzImage</b>
+</p><p>In my particular case with the Wyse D10DP it took about 1 hour and 18 minutes to build the
+kernel.
+
+</p><h2 class="ul">Customising</h2>
+<p>There are a variety of ways in which you can edit the kernel configuration settings. I use
+<b>menuconfig</b> as that's what I've done for years.... [Known as the 'Mother Duck' syndrome]
+</p><p>First step is make any changes we want to make to the source files.  In this case I've
+edited the file <b>drivers/ata/pata_cs5536.c</b>. There is also the alternative more generic driver
+<b>drivers/ata/pata_amd.c</b>, but I initially picked on the explicit cs5336 one as it was more
+obvious what was going on.
+</p><p>Next, for the Wyse SX0, we need the (modified) CS5536 driver and also the CS5535 driver.  The later
+is for the earlier version of the SX0 and is not actually included in the standard Tiny Core build.
+These are the only two drivers we are interested in so we might as well dump the others from our
+custom build.
+</p><p>To edit the kernel <b>.config</b> file we use the command....
+</p><pre class="listing" spellcheck="false">tc@box:~/wyseSX0/linux-4.19.10$ make menuconfig
+</pre>
+<p>This brings up the opening screen:
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen4.gif" alt="Kernel Config menu" class="center">
+</p><p>On these screens you use the cursor up/down keys to get you from line to line,
+the spacebar to change the configuration of the current selection between built-in/excluded/Module,
+and the cursor left/right keys to switch between <b>Select/Exit/Help</b> at the bottom of
+the screen.  A <b>v(+)</b> at the bottom the screen indicates that there are further
+items off the bottom of the screen.
+</p><p>Use the cursor down key to select <b>Device Drivers --&gt;</b> (hit enter) and then
+<b>Serial ATA and Parallel ATA drivers (libata) --&gt;</b> on the next screen.  This then brings
+up the following screen:
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen5.gif" alt="Kernel IDE driver list" class="center">
+</p><p>Our wanted drivers are sitting under <b>ATA SFF support</b> and then <b>ATA BMDA support</b>.
+It is worth initially deselecting <b>ATA BMDA support</b> to collapse the tree so we can then
+easily deselect all the other entries under <b>ATA SFF support</b>.
+
+</p><p>Next change <b>ATA BMDA support</b> to be built-in, and then work through the list excluding
+everything except for our wanted drivers.  There are a fair number of drivers so remember to keep
+on scrolling down the screen until you've done the lot.  What you should end up with is:
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen7.gif" alt="kernel wanted IDE driver list" class="center">
+</p><p>Now select <b>exit</b> at the bottom the screen and work your way back through the previous
+menu screens until you end up with a 'Do you want to save..' prompt.
+<img src="./Thin Clients_ Building a Tinycore kernel_files/tcc_screen8.gif" alt="config exit screen" class="center">
+</p><p>Select <b>Yes</b> and exit.
+</p><p>We now recompile the kernel image (<b>make bzImage</b>).
+</p><p><b>make</b> should only rebuild those parts of the kernel that are affected by the changes we've
+made.  In this example it took about 1 minute 20 seconds to build a new version of the kernel.
+
+</p><h2 class="ul">Testing</h2>
+<p>At this point it's worth spending a few minutes working out how you want to proceed.  To a
+degree this is dependent on whether you are just making a few simple changes to the kernel or whether
+it is something more extensive that may result in a lot of edit/compile/test cycles. Two
+options are:
+</p><ol>
+<li>Copy the new kernel to a USB stick and boot that on the target machine.
+</li><li>Use the PXE capability of the thin client (if supported) to load the
+new kernel over the network.
+</li></ol>
+<p>Option [2] does make the testing cycle easier/quicker but takes more effort to set up. A way of doing
+this is described <a href="https://www.parkytowers.me.uk/thin/Linux/TinycorePXE.shtml">here</a>.
+
+</p><p>It is also worth spending a small amount of time to create some scripts to automate the
+process of getting the new kernel image to where you want it, and, while you're at it, 
+having a way to back track should you make a mistake and things stop working.
+
+</p><p>As mentioned above I wrote up <a href="https://www.parkytowers.me.uk/thin/Linux/TinycorePXE.shtml">how to set up PXE</a> 
+back in 2013. I suggest you read that article if you're headed down that route.  Below is a simple
+approach and script that I've used for an option 1 approach.
+
+</p><p>In this example we need to get the new kernel onto the pen drive and also backup any files we
+are changing - <b>.config</b>, <b>bzImage</b> and <b>pata_cs5336.c</b>. To make life easy we'll
+backup all three of these every time into a directory inventively named <b>backup</b>.
+To keep track of what's what we'll add a time stamp to the file names so we don't accidently
+overwrite previous entries.  As the compile/test cycle takes a few minutes we can use a YYMMDDHHMM
+style of time stamp without bothering about the seconds.
+
+
+</p><p>Starting with a standard installation of Tiny Core on a pen drive I edited the <b>syslinux.cfg</b>
+file on the pen drive to add a 'testing' menu entry that used the kernel file <b>vmlinuzSX0</b>.
+</p><pre class="listing" spellcheck="false">LABEL tcsx
+MENU LABEL Boot TinyCore SX0 (on slow devices, waitusb=5)
+KERNEL /boot/vmlinuzSX0
+INITRD /boot/core.gz
+APPEND loglevel=7  kmap=qwerty/uk waitusb=5 tce=UUID="A677-5512"
+</pre>
+
+<p>What the script does is:
+</p><ol>
+<li>Mount the pen drive.
+</li><li>Copy <b>arch/x86/boot/bzImage</b> to <b>/boot/vmlinuzSX0</b>
+</li><li>Unmount the pen drive.
+</li><li>Backup the key files adding a time stamp to their file names.
+</li></ol>
+<p>My simple script (which lacks a full set of bomb-proof error checks) looks like this:
+</p><pre class="listing" spellcheck="false">#!/bin/sh
+#
+# Ensure PENDRIVE is set to match your system!
+
+PENDRIVE="sdb1"
+STAMP=`date +%y%m%d%H%M`
+
+echo using pendrive $PENDRIVE
+echo timestamp is $STAMP
+
+# Mount the pendrive and copy over the new system.
+#  - check it is inserted
+#  - mount it
+#  - check we can see the boot directory
+#  - copy the file over
+#  - umount it
+
+if ! [ -d "/mnt/$PENDRIVE" ] ; then
+  echo "Pendrive is not present"
+  exit
+fi
+sudo mount /dev/$PENDRIVE /mnt/$PENDRIVE
+if [ $? -ne 0 ] ; then
+  echo "[$?] failed to mount the pen drive"
+  exit
+fi
+
+if ! [ -d "/mnt/$PENDRIVE/boot" ] ; then
+  echo "Can't see the boot directory on $PENDRIVE"
+  exit
+fi
+sudo cp -f arch/x86/boot/bzImage /mnt/$PENDRIVE/boot/vmlinuzSX0
+sudo umount /dev/$PENDRIVE
+echo "kernel copied over"
+
+# Backup our working files
+cp arch/x86/boot/bzImage backup/$STAMP_bzImage
+cp .config backup/$STAMP_config
+cp drivers/ata/pata_cs5536.c backup/$STAMP_pata_cs5536.c
+echo "Files backed up"
+</pre>
+<p>This obviously assumes that the pen drive you insert appears to the system as /dev/sdb1.
+You will need to set the variable <b>PENDRIVE</b> to suit your setup. Also it expects to
+be run from the 'root' directory of the kernel build (where you type <b>make</b>).
+
+</p><p style="text-align:right">[<a href="https://www.parkytowers.me.uk/thin/Linux/Tinycore.shtml">Back</a>]
+
+
+
+</p><footer>
+<p style="clear:both">&nbsp;
+</p><hr>
+<p style="margin-top:0px;"><span style="float:left">
+Any comments?
+<a href="mailto:thin@parkytowers.me.uk">
+email me</a>.</span>
+<span style="float:right">
+
+Added pre March 2014
+
+
+&nbsp;&nbsp;&nbsp;Last update June 2019
+
+</span>
+</p></footer>
+</div>  <!-- end of Content -->
+</div>  <!-- end of MainBody -->
+</div>	<!-- end of Main -->
+
+</body></html>
