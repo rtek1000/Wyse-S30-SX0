@@ -1,5 +1,6 @@
 To use the kernel: Create the bootable USB drive with Rufus (3.21) in ISO mode (DD mode will not work).
 An ISO image of TinyCore or CorePlus should work, but be aware that the DOM may only be 128MB. The DOM could be left with only the kernel and boot files, and the extensions stored on a separate USB drive.
+Tip: Artificial Intelligence can guide you through the step-by-step process.
 
 
 #### Replace the USB drive kernel with the custom SX0 kernel (rename).
