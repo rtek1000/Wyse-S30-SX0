@@ -11,9 +11,13 @@ For example
 
 - - The original kernel is unable to boot on the S30.
 
-Source: https://www.parkytowers.me.uk/thin/wyse/s10/tc_kernel.shtml
+Note: When trying to install SSH (dropbear.tcz) on versions lower than 11, it started asking for dependencies; it might be worth checking this before deciding on the final version to use. An AI recommended using version 7, but I used version 11 because I needed SSH and version 12 seemed unstable.
+
 
 > Tiny Core on the Sx0
+
+> Source: https://www.parkytowers.me.uk/thin/wyse/s10/tc_kernel.shtml
+
 > As it is a neat thin client that I sometimes press into service I occasionally revisit the Sx0 and build an up-to-date Sx0 specific Tiny Core kernel for it. You will find the builds below. I must admit these haven't been extensively tested, but they do work for me. All you need to do is download the new kernel and add it to the boot directory on the Tiny Core USB pen drive (or whatever). You can either overwrite the existing vmlinuz file or add a new entry to the menu system to let you select the Wyse Sx0 specific kernel
 > 
 > Notes:
@@ -31,3 +35,4 @@ Source: https://www.parkytowers.me.uk/thin/wyse/s10/tc_kernel.shtml
 > 
 > 
 
+ 
